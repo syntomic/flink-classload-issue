@@ -21,8 +21,9 @@ public class Add {
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(addClasspaths(jarUrl));
         final StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);
-        tableEnv.executeSql("CREATE TABLE DemoTable (input String) WITH ('connector' = 'custom-source')");
-        tableEnv.executeSql("SELECT UPPER(input) FROM DemoTable").print();
+        tableEnv.executeSql("CREATE TABLE DemoTable (input String) WITH ('connector' = 'source-v1')");
+        tableEnv.executeSql("CREATE TEMPORARY FUNCTION IF NOT EXISTS chat AS 'com.syntomic.issues.added.AddedUDF' LANGUAGE JAVA");
+        tableEnv.executeSql("SELECT chat(input) FROM DemoTable").print();
 	}
 
     /**

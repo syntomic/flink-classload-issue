@@ -61,7 +61,7 @@ public class AddedSourceV1 implements DynamicTableSourceFactory {
             final SourceFunction<RowData> sourceFunction =
                     new CustomFileTableSourceFunction();
     
-            return SourceFunctionProvider.of(sourceFunction, false);
+            return SourceFunctionProvider.of(sourceFunction, true);
         }
         
     }
@@ -70,7 +70,7 @@ public class AddedSourceV1 implements DynamicTableSourceFactory {
 
         @Override
         public void run(SourceContext<RowData> ctx) throws Exception {
-            ctx.collect(GenericRowData.of(StringData.fromString("Nice to meet you!")));
+            ctx.collect(GenericRowData.of(StringData.fromString("Nice to meet you?")));
         }
 
         @Override

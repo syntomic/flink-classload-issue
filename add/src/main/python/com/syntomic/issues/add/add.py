@@ -7,8 +7,9 @@ def main():
     env.add_classpaths("https://raw.githubusercontent.com/syntomic/pyflink-classload-issue/main/jars/udf.jar")
     table_env = StreamTableEnvironment.create(env)
 
-    table_env.execute_sql("CREATE TABLE DemoTable (input String) WITH ('connector' = 'custom-source')")
-    table_env.execute_sql("SELECT UPPER(input) FROM DemoTable").print()
+    table_env.execute_sql("CREATE TABLE DemoTable (input String) WITH ('connector' = 'source-v1')")
+    table_env.executeSql("CREATE TEMPORARY FUNCTION IF NOT EXISTS chat AS 'com.syntomic.issues.added.AddedUDF' LANGUAGE JAVA");
+    table_env.execute_sql("SELECT chat(input) FROM DemoTable").print()
 
 if __name__ == "__main__":
     main()

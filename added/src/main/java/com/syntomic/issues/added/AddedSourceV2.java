@@ -72,7 +72,7 @@ public class AddedSourceV2 implements DynamicTableSourceFactory {
         public void run(SourceContext<RowData> ctx) throws Exception {
 
             while (true) {
-                ctx.collect(GenericRowData.of(StringData.fromString("Nice to meet you!")));
+                ctx.collect(GenericRowData.of(StringData.fromString("Nice to meet you?")));
                 Thread.sleep(2000L);
             }
             
