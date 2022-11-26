@@ -15,11 +15,11 @@ import org.apache.flink.table.data.RowData;
 import org.apache.flink.table.data.StringData;
 import org.apache.flink.table.factories.DynamicTableSourceFactory;
 
-public class Addedv2 implements DynamicTableSourceFactory {
+public class AddedSourceV1 implements DynamicTableSourceFactory {
 
     @Override
     public String factoryIdentifier() {
-        return "custom-source";
+        return "source-v1";
     }
 
     @Override
