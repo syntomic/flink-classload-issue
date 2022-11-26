@@ -17,12 +17,12 @@ public class Add {
 
 	public static void main(String[] args) throws Exception {
 
-        String jarUrl = "https://raw.githubusercontent.com/syntomic/pyflink-classload-issue/master/jars/udf.jars";
+        String jarUrl = "https://raw.githubusercontent.com/syntomic/pyflink-classload-issue/main/jars/udf.jar";
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(addClasspaths(jarUrl));
         final StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);
-        tableEnv.executeSql("CREATE TEMPORARY FUNCTION IF NOT EXISTS chat AS 'com.syntomic.issues.added.Added' LANGUAGE JAVA");
-        tableEnv.executeSql("SELECT chat(input) FROM (VALUES 'Nice to meet you.', 'Today is cold?') AS DemoTable(input)").print();
+        tableEnv.executeSql("CREATE TABLE DemoTable (input String) WITH ('connector' = 'custom-source')");
+        tableEnv.executeSql("SELECT UPPER(input) FROM DemoTable").print();
 	}
 
     /**
